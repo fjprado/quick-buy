@@ -11,7 +11,37 @@ namespace QuickBuy.Repositorio.Config
     {
         public void Configure(EntityTypeBuilder<Pedido> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(pe => pe.Id);
+
+            builder.Property(pe => pe.DataPedido)
+                .IsRequired();
+
+            builder.Property(pe => pe.DataPrevisaoEntrega)
+                .IsRequired();
+
+            builder.Property(pe => pe.CEP)
+                .IsRequired()
+                .HasMaxLength(10);
+
+            builder.Property(pe => pe.Estado)
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasColumnType("varchar");
+
+            builder.Property(pe => pe.Cidade)
+                .IsRequired()
+                .HasMaxLength(60)
+                .HasColumnType("varchar");
+
+            builder.Property(pe => pe.EnderecoCompleto)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnType("varchar");
+
+            builder.Property(pe => pe.NumeroEndereco)
+                .IsRequired();
+
+
         }
     }
 }

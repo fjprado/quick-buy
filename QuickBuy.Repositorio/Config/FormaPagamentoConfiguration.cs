@@ -15,13 +15,11 @@ namespace QuickBuy.Repositorio.Config
 
             builder.Property(f => f.Nome)
                 .IsRequired()
-                .HasMaxLength(10)
-                .HasColumnType("varchar");
+                .HasMaxLength(30);
 
             builder.Property(f => f.Descricao)
                 .IsRequired()
-                .HasMaxLength(20)
-                .HasColumnType("varchar");
+                .HasMaxLength(50);
 
         }
     }

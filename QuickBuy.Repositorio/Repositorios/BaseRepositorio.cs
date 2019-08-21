@@ -17,21 +17,23 @@ namespace QuickBuy.Repositorio
         public void Adicionar(TEntity entity)
         {
             _quickBuyContexto.Set<TEntity>().Add(entity);
+            _quickBuyContexto.SaveChanges();
         }
 
         public void Atualizar(TEntity entity)
         {
-            throw new NotImplementedException();
+            _quickBuyContexto.Set<TEntity>().Update(entity);
+            _quickBuyContexto.SaveChanges();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _quickBuyContexto.Dispose();
         }
 
         public TEntity ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return _quickBuyContexto.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> ObterTodos()
@@ -41,7 +43,8 @@ namespace QuickBuy.Repositorio
 
         public void Remover(TEntity entity)
         {
-            throw new NotImplementedException();
+            _quickBuyContexto.Remove(entity);
+            _quickBuyContexto.SaveChanges();
         }
     }
 }

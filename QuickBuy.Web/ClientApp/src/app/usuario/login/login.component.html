@@ -14,7 +14,10 @@
            class="form-control mb-2"
            [(ngModel)] ="usuario.senha"/>
 
-    <button class="btn btn-primary btn-block mb-2" type="submit" (click)="login()">Entrar</button>
+    <button class="btn btn-primary btn-block mb-2" type="submit" (click)="login()" [disabled]="ativarSpinner">
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>
+      Entrar
+    </button>
     <div class="alert alert-danger" *ngIf="mensagem">
       {{mensagem}}
     </div>

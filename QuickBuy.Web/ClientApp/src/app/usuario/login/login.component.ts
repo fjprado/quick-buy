@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   public usuario;
   public mensagem: string;
   public returnUrl: string;
+  public ativarSpinner: boolean;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private usuarioServico: UsuarioServico) {
   }
@@ -23,14 +24,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
+    this.ativarSpinner = true;
     this.usuarioServico.verificarUsuario(this.usuario).
       subscribe(
-        data => {
-          var usuarioRetorno: Usuario;
-          usuarioRetorno = data;
-          sessionStorage.setItem("usuario-autenticado", "1");
-          sessionStorage.setItem("email-usuario", usuarioRetorno.email);
+        usuario_json => {
+          this.usuarioServico.usuario = usuario_json;
 
           if (this.returnUrl == null) {
             this.router.navigate(['/']);
@@ -41,13 +39,8 @@ export class LoginComponent implements OnInit {
         err => {
           console.log(err);
           this.mensagem = err.error;
+          this.ativarSpinner = false;
         }
     );
-
-
-    //if (this.usuario.email == "email.com.br" && this.usuario.senha == "abc") {
-    //  sessionStorage.setItem("usuario-autenticado", "1");
-    //  this.router.navigate([this.returnUrl]);
-    //}
   }
 }
